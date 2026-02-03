@@ -56,9 +56,20 @@ function RangeVisualization({
   }
   
   // 计算当前值在可视化范围内的位置（百分比）
-  const valuePosition = ((value - rangeMin) / (rangeMax - rangeMin)) * 100
-  const rangeStartPosition = ((range[0] - rangeMin) / (rangeMax - rangeMin)) * 100
-  const rangeEndPosition = ((range[1] - rangeMin) / (rangeMax - rangeMin)) * 100
+  let valuePosition: number
+  let rangeStartPosition: number
+  let rangeEndPosition: number
+
+  if (rangeMax === rangeMin) {
+    // 避免除以 0 的情况：当范围跨度为 0 时，将位置固定在中间
+    valuePosition = 50
+    rangeStartPosition = 50
+    rangeEndPosition = 50
+  } else {
+    valuePosition = ((value - rangeMin) / (rangeMax - rangeMin)) * 100
+    rangeStartPosition = ((range[0] - rangeMin) / (rangeMax - rangeMin)) * 100
+    rangeEndPosition = ((range[1] - rangeMin) / (rangeMax - rangeMin)) * 100
+  }
   
   // 确保位置在 0-100% 之间
   const clampedValuePosition = Math.max(0, Math.min(100, valuePosition))
