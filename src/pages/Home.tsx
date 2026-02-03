@@ -181,7 +181,7 @@ function RecordDetail({ record, basic }: { record: Record; basic: BasicInfo }) {
           <div>主要指标</div>
           <div className='flex space-x-2'>
             <div>综合评分：</div>
-            <Rate disabled count={5} value={record.score / 20} />
+            <Rate disabled count={5} value={record.score / 20} aria-label="综合评分" />
             <div>{record.score}</div>
           </div>
         </div>
