@@ -11,7 +11,7 @@ type BasicInfo = typeof basic
 
 // 判断数值是否在正常范围内
 const isInRange = (value: number, range: number[]) => {
-  return range.length >= 2 && value >= range[0] && value <= range[1]
+  return range.length >= 2 && range[0] <= range[1] && value >= range[0] && value <= range[1]
 }
 
 // 范围可视化组件
