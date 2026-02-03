@@ -10,6 +10,11 @@ import basic from '../assets/basic.json5'
 type HealthRecord = typeof records[0]
 type BasicInfo = typeof basic
 
+const skeletalMuscleRange = (weight: number) => {
+  const formatNumber = (numb: number) => Number(numb.toFixed(2))
+  return [formatNumber(weight * 0.4), formatNumber(weight * 0.5)]
+}
+
 // 判断数值是否在正常范围内
 const isInRange = (value: number, range: number[]) => {
   return range.length >= 2 && range[0] <= range[1] && value >= range[0] && value <= range[1]
@@ -330,17 +335,20 @@ function RecordDetail({ record, basic, sortedRecords }: { record: HealthRecord; 
       previousValue: previousRecord?.inorganicSalt ?? null,
     },
     {
+      key: 'extracellularWaterPercentage',
+      title: '细胞外水分比率',
+      value: record.extracellularWaterPercentage * 100,
+      unit: '%',
+      range: basic.extracellularWaterPercentageRange.map((item: number) => item * 100),
+      previousValue: previousRecord?.extracellularWaterPercentage ? previousRecord.extracellularWaterPercentage * 100 : null,
+    },
+    {
       key: 'skeletalMuscle',
       title: '骨骼肌',
       value: record.skeletalMuscle,
       unit: record.skeletalMuscleUnit,
+      range: skeletalMuscleRange(record.weight),
       previousValue: previousRecord?.skeletalMuscle ?? null,
-    },
-    {
-      key: 'extracellularWaterPercentage',
-      title: '细胞外水分比率',
-      value: record.extracellularWaterPercentage,
-      previousValue: previousRecord?.extracellularWaterPercentage ?? null,
     },
   ]
 

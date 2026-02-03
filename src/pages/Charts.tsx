@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react'
+import { useEffect, useRef, useMemo, Fragment } from 'react'
 import * as echarts from 'echarts'
 import { Card, Row, Col, Empty } from 'antd'
 // @ts-ignore
@@ -12,13 +12,15 @@ function Chart({
   data, 
   unit, 
   range,
-  decimalPlaces = 0
+  decimalPlaces = 0,
+  showPercentageLine = false
 }: { 
   title: string
   data: Array<[string, number]>
   unit?: string
   range?: number[]
   decimalPlaces?: number
+  showPercentageLine?: boolean
 }) {
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstanceRef = useRef<echarts.ECharts | null>(null)
@@ -194,7 +196,34 @@ function Chart({
             fontSize: 11,
             color: '#333'
           },
-          markLine: range ? {
+          markLine: showPercentageLine ? {
+            silent: true,
+            symbol: 'none',
+            lineStyle: {
+              type: 'dashed',
+              width: 2,
+              color: '#999999'
+            },
+            label: {
+              show: true,
+              position: 'end',
+              formatter: '100%',
+              color: '#999999',
+              fontWeight: 'bold'
+            },
+            data: [
+              {
+                yAxis: 100,
+                name: '100%',
+                lineStyle: {
+                  color: '#999999'
+                },
+                label: {
+                  color: '#999999'
+                }
+              }
+            ]
+          } : range ? {
             silent: true,
             symbol: 'none',
             lineStyle: {
@@ -253,7 +282,7 @@ function Chart({
       window.removeEventListener('resize', handleResize)
       chart.dispose()
     }
-  }, [title, data, unit, range, decimalPlaces])
+  }, [title, data, unit, range, decimalPlaces, showPercentageLine])
 
   // 如果没有数据，显示空状态
   if (data.length === 0) {
@@ -362,52 +391,53 @@ export default function Charts() {
       {
         key: 'extracellularWaterPercentage',
         title: '细胞外水分比率',
-        data: sortedRecords.map(r => [r.date, r.extracellularWaterPercentage] as [string, number]),
-        unit: undefined,
-        range: undefined
+        data: sortedRecords.map(r => [r.date, r.extracellularWaterPercentage * 100] as [string, number]),
+        unit: '%',
+        range: basic.extracellularWaterPercentageRange.map((item: number) => item * 100)
       }
     ]
   }, [sortedRecords, heightInMeters])
 
   // 肌肉均衡数据
   const muscleBalanceMetrics = useMemo(() => {
-    return [
+    const metrics = [
       {
         key: 'leftUpperArm',
         title: '左上肢',
-        data: sortedRecords.map(r => [r.date, r.muscleBalance.leftUpperArm.weight] as [string, number]),
-        unit: sortedRecords[0]?.muscleBalance.leftUpperArm.weightUnit,
-        range: undefined
+        weightData: sortedRecords.map(r => [r.date, r.muscleBalance.leftUpperArm.weight] as [string, number]),
+        percentageData: sortedRecords.map(r => [r.date, r.muscleBalance.leftUpperArm.weightPercentage] as [string, number]),
+        unit: sortedRecords[0]?.muscleBalance.leftUpperArm.weightUnit
       },
       {
         key: 'rightUpperArm',
         title: '右上肢',
-        data: sortedRecords.map(r => [r.date, r.muscleBalance.rightUpperArm.weight] as [string, number]),
-        unit: sortedRecords[0]?.muscleBalance.rightUpperArm.weightUnit,
-        range: undefined
+        weightData: sortedRecords.map(r => [r.date, r.muscleBalance.rightUpperArm.weight] as [string, number]),
+        percentageData: sortedRecords.map(r => [r.date, r.muscleBalance.rightUpperArm.weightPercentage] as [string, number]),
+        unit: sortedRecords[0]?.muscleBalance.rightUpperArm.weightUnit
       },
       {
         key: 'trunk',
         title: '躯干',
-        data: sortedRecords.map(r => [r.date, r.muscleBalance.trunk.weight] as [string, number]),
-        unit: sortedRecords[0]?.muscleBalance.trunk.weightUnit,
-        range: undefined
+        weightData: sortedRecords.map(r => [r.date, r.muscleBalance.trunk.weight] as [string, number]),
+        percentageData: sortedRecords.map(r => [r.date, r.muscleBalance.trunk.weightPercentage] as [string, number]),
+        unit: sortedRecords[0]?.muscleBalance.trunk.weightUnit
       },
       {
         key: 'leftLowerLimb',
         title: '左下肢',
-        data: sortedRecords.map(r => [r.date, r.muscleBalance.leftLowerLimb.weight] as [string, number]),
-        unit: sortedRecords[0]?.muscleBalance.leftLowerLimb.weightUnit,
-        range: undefined
+        weightData: sortedRecords.map(r => [r.date, r.muscleBalance.leftLowerLimb.weight] as [string, number]),
+        percentageData: sortedRecords.map(r => [r.date, r.muscleBalance.leftLowerLimb.weightPercentage] as [string, number]),
+        unit: sortedRecords[0]?.muscleBalance.leftLowerLimb.weightUnit
       },
       {
         key: 'rightLowerLimb',
         title: '右下肢',
-        data: sortedRecords.map(r => [r.date, r.muscleBalance.rightLowerLimb.weight] as [string, number]),
-        unit: sortedRecords[0]?.muscleBalance.rightLowerLimb.weightUnit,
-        range: undefined
+        weightData: sortedRecords.map(r => [r.date, r.muscleBalance.rightLowerLimb.weight] as [string, number]),
+        percentageData: sortedRecords.map(r => [r.date, r.muscleBalance.rightLowerLimb.weightPercentage] as [string, number]),
+        unit: sortedRecords[0]?.muscleBalance.rightLowerLimb.weightUnit
       }
     ]
+    return metrics
   }, [sortedRecords])
 
   return (
@@ -450,17 +480,31 @@ export default function Charts() {
       >
         <Row gutter={[16, 24]}>
           {muscleBalanceMetrics.map(metric => (
-            <Col xs={24} sm={24} md={12} lg={12} xl={12} key={metric.key}>
-              <div className="bg-white rounded-lg p-2">
-                <Chart
-                  title={metric.title}
-                  data={metric.data}
-                  unit={metric.unit}
-                  range={metric.range}
-                  decimalPlaces={0}
-                />
-              </div>
-            </Col>
+            <Fragment key={metric.key}>
+              <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                <div className="bg-white rounded-lg p-2">
+                  <Chart
+                    title={metric.title}
+                    data={metric.weightData}
+                    unit={metric.unit}
+                    range={undefined}
+                    decimalPlaces={0}
+                  />
+                </div>
+              </Col>
+              <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+                <div className="bg-white rounded-lg p-2">
+                  <Chart
+                    title={`${metric.title}（相对于标准值）`}
+                    data={metric.percentageData}
+                    unit="%"
+                    range={undefined}
+                    decimalPlaces={1}
+                    showPercentageLine={true}
+                  />
+                </div>
+              </Col>
+            </Fragment>
           ))}
         </Row>
       </Card>
