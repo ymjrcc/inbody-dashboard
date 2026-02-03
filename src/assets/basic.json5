@@ -1,0 +1,15 @@
+{
+  "name": "张三",
+  "birthday": "1992-10-26",
+  "gender": "男",
+  "height": 169,
+  "totalWaterRange": [35.4, 43.2],
+  "proteinRange": [9.5, 11.6],
+  "inorganicSaltRange": [3.27, 3.99],
+  "bodyFatRange": [7.6, 15.1],
+  "bodyFatPercentageRange": [10, 20],
+  "muscleMassRange": [45.4, 55.4],
+  "leanBodyMassRange": [48.1, 58.7],
+  "weightRange": [53.4, 72.2],
+  "bmiRange": [18.5, 24.9]
+}
