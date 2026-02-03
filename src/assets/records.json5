@@ -1,0 +1,130 @@
+[
+  {
+    "date": "2026-01-31",
+    // 评分
+    "score": 82,
+    // 身体总水分
+    "totalWater": 42.6,
+    "totalWaterUnit": "L",
+    // 蛋白质
+    "protein": 11.7,
+    "proteinUnit": "kg",
+    // 无机盐
+    "inorganicSalt": 3.9,
+    "inorganicSaltUnit": "kg",
+    // 体脂肪
+    "bodyFat": 12.7,
+    "bodyFatUnit": "kg",
+    // 肌肉量
+    "muscleMass": 55.1,
+    "muscleMassUnit": "kg",
+    // 去脂体重
+    "leanBodyMass": 58.2,
+    "leanBodyMassUnit": "kg",
+    // 体重
+    "weight": 70.9,
+    "weightUnit": "kg",
+    // 骨骼肌
+    "skeletalMuscle": 33.4,
+    "skeletalMuscleUnit": "kg",
+    // 细胞外水分比率：
+    "extracellularWaterPercentage": 0.364,
+    // 肌肉均衡
+    "muscleBalance": {
+      // 右上肢
+      "rightUpperArm": {
+        "weight": 3.48,
+        "weightUnit": "kg",
+        "weightPercentage": 112.4
+      },
+      // 左上肢
+      "leftUpperArm": {
+        "weight": 3.41,
+        "weightUnit": "kg",
+        "weightPercentage": 110.3
+      },
+      // 躯干
+      "trunk": {
+        "weight": 26.8,
+        "weightUnit": "kg",
+        "weightPercentage": 108.9
+      },
+      // 右下肢
+      "rightLowerLimb": {
+        "weight": 8.46,
+        "weightUnit": "kg",
+        "weightPercentage": 98.4
+      },
+      // 左下肢
+      "leftLowerLimb": {
+        "weight": 8.50,
+        "weightUnit": "kg",
+        "weightPercentage": 98.9
+      }
+    }
+  },
+  {
+    "date": "2026-01-10",
+    // 评分
+    "score": 81,
+    // 身体总水分
+    "totalWater": 42.5,
+    "totalWaterUnit": "L",
+    // 蛋白质
+    "protein": 11.7,
+    "proteinUnit": "kg",
+    // 无机盐
+    "inorganicSalt": 3.9,
+    "inorganicSaltUnit": "kg",
+    // 体脂肪
+    "bodyFat": 13.6,
+    "bodyFatUnit": "kg",
+    // 肌肉量
+    "muscleMass": 54.9,
+    "muscleMassUnit": "kg",
+    // 去脂体重
+    "leanBodyMass": 58.1,
+    "leanBodyMassUnit": "kg",
+    // 体重
+    "weight": 71.7,
+    "weightUnit": "kg",
+    // 骨骼肌
+    "skeletalMuscle": 33.3,
+    "skeletalMuscleUnit": "kg",
+    // 细胞外水分比率：
+    "extracellularWaterPercentage": 0.364,
+    // 肌肉均衡
+    "muscleBalance": {
+      // 右上肢
+      "rightUpperArm": {
+        "weight": 3.43,
+        "weightUnit": "kg",
+        "weightPercentage": 110.5
+      },
+      // 左上肢
+      "leftUpperArm": {
+        "weight": 3.44,
+        "weightUnit": "kg",
+        "weightPercentage": 111
+      },
+      // 躯干
+      "trunk": {
+        "weight": 26.8,
+        "weightUnit": "kg",
+        "weightPercentage": 108.4
+      },
+      // 右下肢
+      "rightLowerLimb": {
+        "weight": 8.37,
+        "weightUnit": "kg",
+        "weightPercentage": 97.1
+      },
+      // 左下肢
+      "leftLowerLimb": {
+        "weight": 8.34,
+        "weightUnit": "kg",
+        "weightPercentage": 96.8
+      }
+    }
+  }
+]
