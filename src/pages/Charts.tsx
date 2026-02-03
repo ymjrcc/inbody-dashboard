@@ -28,10 +28,8 @@ function Chart({
     const chart = echarts.init(chartRef.current)
     chartInstanceRef.current = chart
 
-    // 准备数据：按时间排序
-    const sortedData = [...data].sort((a, b) => 
-      new Date(a[0]).getTime() - new Date(b[0]).getTime()
-    )
+    // 数据已在父组件中按时间排序，这里直接使用
+    const sortedData = data
 
     // 计算纵轴最小值：取数据最小值和范围下限的较小值，然后减去适当的余量，并向下取整为5的倍数
     const dataMin = Math.min(...sortedData.map(([, value]) => value))
