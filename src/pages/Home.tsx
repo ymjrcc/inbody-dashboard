@@ -352,6 +352,7 @@ function RecordDetail({ record, basic, sortedRecords }: { record: HealthRecord; 
       previousData: previousRecord?.muscleBalance?.leftUpperArm ?? null,
     },
     {
+      key: 'blank1',
       blank: true,
     },
     {
@@ -361,6 +362,7 @@ function RecordDetail({ record, basic, sortedRecords }: { record: HealthRecord; 
       previousData: previousRecord?.muscleBalance?.rightUpperArm ?? null,
     },
     {
+      key: 'blank2',
       blank: true,
     },
     {
@@ -370,6 +372,7 @@ function RecordDetail({ record, basic, sortedRecords }: { record: HealthRecord; 
       previousData: previousRecord?.muscleBalance?.trunk ?? null,
     },
     {
+      key: 'blank3',
       blank: true,
     },
     {
@@ -379,6 +382,7 @@ function RecordDetail({ record, basic, sortedRecords }: { record: HealthRecord; 
       previousData: previousRecord?.muscleBalance?.leftLowerLimb ?? null,
     },
     {
+      key: 'blank4',
       blank: true,
     },
     {
