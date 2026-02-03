@@ -38,9 +38,10 @@ function RangeVisualization({
     rangeMin = min
     rangeMax = max
   } else if (inRange) {
-    // 在范围内：不留白，直接使用正常范围
-    rangeMin = range[0]
-    rangeMax = range[1]
+    // 在范围内：适当留白
+    const padding = rangeSpan * 0.1 // 留白为范围跨度的10%
+    rangeMin = range[0] - padding
+    rangeMax = range[1] + padding
   } else {
     // 在范围外：适当留白
     const padding = rangeSpan * 0.1 // 留白为范围跨度的10%
@@ -132,27 +133,40 @@ export default function Home() {
     children: <RecordDetail record={record} basic={basic} />
   }))
 
+  const basicInfoList = [
+    {
+      key: 'name',
+      title: '姓名',
+      value: basic.name,
+    },
+    {
+      key: 'birthday',
+      title: '生日',
+      value: basic.birthday,
+    },
+    {
+      key: 'gender',
+      title: '性别',
+      value: basic.gender,
+    },
+    {
+      key: 'height',
+      title: '身高',
+      value: `${basic.height} cm`,
+    }
+  ]
+
   return (
     <div className="p-4 max-w-7xl mx-auto">
       {/* 基础信息卡片 */}
       <Card title="基础信息" className="mb-6">
         <Row gutter={[16, 16]}>
-          <Col xs={24} sm={12} md={6}>
-            <div className="text-gray-600">姓名</div>
-            <div className="text-lg font-semibold">{basic.name}</div>
-          </Col>
-          <Col xs={24} sm={12} md={6}>
-            <div className="text-gray-600">生日</div>
-            <div className="text-lg font-semibold">{basic.birthday}</div>
-          </Col>
-          <Col xs={24} sm={12} md={6}>
-            <div className="text-gray-600">性别</div>
-            <div className="text-lg font-semibold">{basic.gender}</div>
-          </Col>
-          <Col xs={24} sm={12} md={6}>
-            <div className="text-gray-600">身高</div>
-            <div className="text-lg font-semibold">{basic.height} cm</div>
-          </Col>
+          {basicInfoList.map(item => (
+            <Col xs={24} sm={12} md={6} key={item.key}>
+              <div className="text-gray-600">{item.title}</div>
+              <div className="text-lg font-semibold">{item.value}</div>
+            </Col>
+          ))}
         </Row>
       </Card>
 
@@ -165,13 +179,120 @@ export default function Home() {
 }
 
 // 记录详情组件
-function RecordDetail({ record, basic }: { record: Record; basic: BasicInfo }) {
+function RecordDetail({ record, basic }: { record: HealthRecord; basic: BasicInfo }) {
   // 计算体脂率 = 体脂肪 / 体重 * 100
   const bodyFatPercentage = (record.bodyFat / record.weight) * 100
   
   // 计算 BMI = 体重(kg) / 身高(m)²
   const heightInMeters = basic.height / 100
   const bmi = record.weight / (heightInMeters * heightInMeters)
+
+  const mainList = [
+    {
+      key: 'weight',
+      title: '体重',
+      value: record.weight,
+      unit: record.weightUnit,
+      range: basic.weightRange,
+    },
+    {
+      key: 'bodyFat',
+      title: '体脂肪',
+      value: record.bodyFat,
+      unit: record.bodyFatUnit,
+      range: basic.bodyFatRange,
+    },
+    {
+      key: 'bodyFatPercentage',
+      title: '体脂率',
+      value: bodyFatPercentage,
+      unit: '%',
+      range: basic.bodyFatPercentageRange,
+      formatValue: true,
+    },
+    {
+      key: 'bmi',
+      title: 'BMI',
+      value: bmi,
+      unit: undefined,
+      range: basic.bmiRange,
+      formatValue: true,
+    },
+    {
+      key: 'muscleMass',
+      title: '肌肉量',
+      value: record.muscleMass,
+      unit: record.muscleMassUnit,
+      range: basic.muscleMassRange,
+    },
+    {
+      key: 'leanBodyMass',
+      title: '去脂体重',
+      value: record.leanBodyMass,
+      unit: record.leanBodyMassUnit,
+      range: basic.leanBodyMassRange,
+    },
+    {
+      key: 'totalWater',
+      title: '身体总水分',
+      value: record.totalWater,
+      unit: record.totalWaterUnit,
+      range: basic.totalWaterRange,
+    },
+    {
+      key: 'protein',
+      title: '蛋白质',
+      value: record.protein,
+      unit: record.proteinUnit,
+      range: basic.proteinRange,
+    },
+    {
+      key: 'inorganicSalt',
+      title: '无机盐',
+      value: record.inorganicSalt,
+      unit: record.inorganicSaltUnit,
+      range: basic.inorganicSaltRange,
+    },
+    {
+      key: 'skeletalMuscle',
+      title: '骨骼肌',
+      value: record.skeletalMuscle,
+      unit: record.skeletalMuscleUnit,
+    },
+    {
+      key: 'extracellularWaterPercentage',
+      title: '细胞外水分比率',
+      value: record.extracellularWaterPercentage,
+    },
+  ]
+
+  const muscleBalanceList = [
+    {
+      key: 'rightUpperArm',
+      title: '右上肢',
+      data: record.muscleBalance.rightUpperArm,
+    },
+    {
+      key: 'leftUpperArm',
+      title: '左上肢',
+      data: record.muscleBalance.leftUpperArm,
+    },
+    {
+      key: 'trunk',
+      title: '躯干',
+      data: record.muscleBalance.trunk,
+    },
+    {
+      key: 'rightLowerLimb',
+      title: '右下肢',
+      data: record.muscleBalance.rightLowerLimb,
+    },
+    {
+      key: 'leftLowerLimb',
+      title: '左下肢',
+      data: record.muscleBalance.leftLowerLimb,
+    },
+  ]
   
   return (
     <div className="space-y-6">
@@ -187,158 +308,20 @@ function RecordDetail({ record, basic }: { record: Record; basic: BasicInfo }) {
         </div>
       }>
         <Row gutter={[16, 16]}>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="体重"
-              value={record.weight}
-              suffix={record.weightUnit}
-              valueStyle={{
-                color: isInRange(record.weight, basic.weightRange) ? '#3f8600' : '#cf1322'
-              }}
-            />
-            <div className="text-xs text-gray-500 mt-1">
-              正常范围: {basic.weightRange[0]} - {basic.weightRange[1]} {record.weightUnit}
-            </div>
-            <RangeVisualization 
-              value={record.weight} 
-              range={basic.weightRange}
-            />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="体脂肪"
-              value={record.bodyFat}
-              suffix={record.bodyFatUnit}
-              valueStyle={{
-                color: isInRange(record.bodyFat, basic.bodyFatRange) ? '#3f8600' : '#cf1322'
-              }}
-            />
-            <div className="text-xs text-gray-500 mt-1">
-              正常范围: {basic.bodyFatRange[0]} - {basic.bodyFatRange[1]} {record.bodyFatUnit}
-            </div>
-            <RangeVisualization 
-              value={record.bodyFat} 
-              range={basic.bodyFatRange}
-            />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="体脂率"
-              value={bodyFatPercentage.toFixed(2)}
-              suffix="%"
-              valueStyle={{
-                color: isInRange(bodyFatPercentage, basic.bodyFatPercentageRange) ? '#3f8600' : '#cf1322'
-              }}
-            />
-            <div className="text-xs text-gray-500 mt-1">
-              正常范围: {basic.bodyFatPercentageRange[0]} - {basic.bodyFatPercentageRange[1]}%
-            </div>
-            <RangeVisualization 
-              value={bodyFatPercentage} 
-              range={basic.bodyFatPercentageRange}
-            />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="BMI"
-              value={bmi.toFixed(2)}
-              valueStyle={{
-                color: isInRange(bmi, basic.bmiRange) ? '#3f8600' : '#cf1322'
-              }}
-            />
-            <div className="text-xs text-gray-500 mt-1">
-              正常范围: {basic.bmiRange[0]} - {basic.bmiRange[1]}
-            </div>
-            <RangeVisualization 
-              value={bmi} 
-              range={basic.bmiRange}
-            />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="肌肉量"
-              value={record.muscleMass}
-              suffix={record.muscleMassUnit}
-              valueStyle={{
-                color: isInRange(record.muscleMass, basic.muscleMassRange) ? '#3f8600' : '#cf1322'
-              }}
-            />
-            <div className="text-xs text-gray-500 mt-1">
-              正常范围: {basic.muscleMassRange[0]} - {basic.muscleMassRange[1]} {record.muscleMassUnit}
-            </div>
-            <RangeVisualization 
-              value={record.muscleMass} 
-              range={basic.muscleMassRange}
-            />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="去脂体重"
-              value={record.leanBodyMass}
-              suffix={record.leanBodyMassUnit}
-              valueStyle={{
-                color: isInRange(record.leanBodyMass, basic.leanBodyMassRange) ? '#3f8600' : '#cf1322'
-              }}
-            />
-            <div className="text-xs text-gray-500 mt-1">
-              正常范围: {basic.leanBodyMassRange[0]} - {basic.leanBodyMassRange[1]} {record.leanBodyMassUnit}
-            </div>
-            <RangeVisualization 
-              value={record.leanBodyMass} 
-              range={basic.leanBodyMassRange}
-            />
-          </Col>
-          {[
-            {
-              key: 'totalWater',
-              title: '身体总水分',
-              value: record.totalWater,
-              unit: record.totalWaterUnit,
-              range: basic.totalWaterRange,
-            },
-            {
-              key: 'protein',
-              title: '蛋白质',
-              value: record.protein,
-              unit: record.proteinUnit,
-              range: basic.proteinRange,
-            },
-            {
-              key: 'inorganicSalt',
-              title: '无机盐',
-              value: record.inorganicSalt,
-              unit: record.inorganicSaltUnit,
-              range: basic.inorganicSaltRange,
-            },
-            {
-              key: 'skeletalMuscle',
-              title: '骨骼肌',
-              value: record.skeletalMuscle,
-              unit: record.skeletalMuscleUnit,
-            },
-            {
-              key: 'extracellularWaterPercentage',
-              title: '细胞外水分比率',
-              value: record.extracellularWaterPercentage,
-            },
-          ].map(metric => (
+          {mainList.map(metric => (
             <Col xs={24} sm={12} md={8} lg={6} key={metric.key}>
               <Statistic
                 title={metric.title}
-                value={metric.value}
+                value={metric.formatValue ? metric.value.toFixed(2) : metric.value}
                 suffix={metric.unit}
-                valueStyle={
-                  metric.range
-                    ? {
-                        color: isInRange(metric.value, metric.range) ? '#3f8600' : '#cf1322',
-                      }
-                    : undefined
-                }
+                styles={{
+                  content:  metric.range ? { color: isInRange(metric.value, metric.range) ? '#3f8600' : '#cf1322' } : undefined
+                }}
               />
               {metric.range && (
                 <>
                   <div className="text-xs text-gray-500 mt-1">
-                    正常范围: {metric.range[0]} - {metric.range[1]} {metric.unit}
+                    正常范围: {metric.range[0]} - {metric.range[1]} {metric.unit || ''}
                   </div>
                   <RangeVisualization value={metric.value} range={metric.range} />
                 </>
@@ -351,51 +334,17 @@ function RecordDetail({ record, basic }: { record: Record; basic: BasicInfo }) {
       {/* 肌肉均衡 */}
       <Card title="肌肉均衡">
         <Row gutter={[16, 16]}>
-          <Col xs={24} sm={12} md={8}>
-            <div className="text-gray-600 mb-1">右上肢</div>
-            <div className="text-lg font-semibold">
-              {record.muscleBalance.rightUpperArm.weight} {record.muscleBalance.rightUpperArm.weightUnit}
-            </div>
-            <div className="text-sm text-gray-500">
-              ({record.muscleBalance.rightUpperArm.weightPercentage}%)
-            </div>
-          </Col>
-          <Col xs={24} sm={12} md={8}>
-            <div className="text-gray-600 mb-1">左上肢</div>
-            <div className="text-lg font-semibold">
-              {record.muscleBalance.leftUpperArm.weight} {record.muscleBalance.leftUpperArm.weightUnit}
-            </div>
-            <div className="text-sm text-gray-500">
-              ({record.muscleBalance.leftUpperArm.weightPercentage}%)
-            </div>
-          </Col>
-          <Col xs={24} sm={12} md={8}>
-            <div className="text-gray-600 mb-1">躯干</div>
-            <div className="text-lg font-semibold">
-              {record.muscleBalance.trunk.weight} {record.muscleBalance.trunk.weightUnit}
-            </div>
-            <div className="text-sm text-gray-500">
-              ({record.muscleBalance.trunk.weightPercentage}%)
-            </div>
-          </Col>
-          <Col xs={24} sm={12} md={8}>
-            <div className="text-gray-600 mb-1">右下肢</div>
-            <div className="text-lg font-semibold">
-              {record.muscleBalance.rightLowerLimb.weight} {record.muscleBalance.rightLowerLimb.weightUnit}
-            </div>
-            <div className="text-sm text-gray-500">
-              ({record.muscleBalance.rightLowerLimb.weightPercentage}%)
-            </div>
-          </Col>
-          <Col xs={24} sm={12} md={8}>
-            <div className="text-gray-600 mb-1">左下肢</div>
-            <div className="text-lg font-semibold">
-              {record.muscleBalance.leftLowerLimb.weight} {record.muscleBalance.leftLowerLimb.weightUnit}
-            </div>
-            <div className="text-sm text-gray-500">
-              ({record.muscleBalance.leftLowerLimb.weightPercentage}%)
-            </div>
-          </Col>
+          {muscleBalanceList.map(item => (
+            <Col xs={24} sm={12} md={8} key={item.key}>
+              <div className="text-gray-600 mb-1">{item.title}</div>
+              <div className="text-lg font-semibold">
+                {item.data.weight} {item.data.weightUnit}
+              </div>
+              <div className="text-sm text-gray-500">
+                ({item.data.weightPercentage}%)
+              </div>
+            </Col>
+          ))}
         </Row>
       </Card>
     </div>
