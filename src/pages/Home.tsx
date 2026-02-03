@@ -277,70 +277,63 @@ function RecordDetail({ record, basic }: { record: Record; basic: BasicInfo }) {
               range={basic.leanBodyMassRange}
             />
           </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="身体总水分"
-              value={record.totalWater}
-              suffix={record.totalWaterUnit}
-              valueStyle={{
-                color: isInRange(record.totalWater, basic.totalWaterRange) ? '#3f8600' : '#cf1322'
-              }}
-            />
-            <div className="text-xs text-gray-500 mt-1">
-              正常范围: {basic.totalWaterRange[0]} - {basic.totalWaterRange[1]} {record.totalWaterUnit}
-            </div>
-            <RangeVisualization 
-              value={record.totalWater} 
-              range={basic.totalWaterRange}
-            />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="蛋白质"
-              value={record.protein}
-              suffix={record.proteinUnit}
-              valueStyle={{
-                color: isInRange(record.protein, basic.proteinRange) ? '#3f8600' : '#cf1322'
-              }}
-            />
-            <div className="text-xs text-gray-500 mt-1">
-              正常范围: {basic.proteinRange[0]} - {basic.proteinRange[1]} {record.proteinUnit}
-            </div>
-            <RangeVisualization 
-              value={record.protein} 
-              range={basic.proteinRange}
-            />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="无机盐"
-              value={record.inorganicSalt}
-              suffix={record.inorganicSaltUnit}
-              valueStyle={{
-                color: isInRange(record.inorganicSalt, basic.inorganicSaltRange) ? '#3f8600' : '#cf1322'
-              }}
-            />
-            <div className="text-xs text-gray-500 mt-1">
-              正常范围: {basic.inorganicSaltRange[0]} - {basic.inorganicSaltRange[1]} {record.inorganicSaltUnit}
-            </div>
-            <RangeVisualization 
-              value={record.inorganicSalt} 
-              range={basic.inorganicSaltRange}
-            />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="骨骼肌"
-              value={record.skeletalMuscle}
-              suffix={record.skeletalMuscleUnit}
-            />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={6}>
-            <Statistic
-              title="细胞外水分比率"
-              value={record.extracellularWaterPercentage}
-            />
-          </Col>
+          {[
+            {
+              key: 'totalWater',
+              title: '身体总水分',
+              value: record.totalWater,
+              unit: record.totalWaterUnit,
+              range: basic.totalWaterRange,
+            },
+            {
+              key: 'protein',
+              title: '蛋白质',
+              value: record.protein,
+              unit: record.proteinUnit,
+              range: basic.proteinRange,
+            },
+            {
+              key: 'inorganicSalt',
+              title: '无机盐',
+              value: record.inorganicSalt,
+              unit: record.inorganicSaltUnit,
+              range: basic.inorganicSaltRange,
+            },
+            {
+              key: 'skeletalMuscle',
+              title: '骨骼肌',
+              value: record.skeletalMuscle,
+              unit: record.skeletalMuscleUnit,
+            },
+            {
+              key: 'extracellularWaterPercentage',
+              title: '细胞外水分比率',
+              value: record.extracellularWaterPercentage,
+            },
+          ].map(metric => (
+            <Col xs={24} sm={12} md={8} lg={6} key={metric.key}>
+              <Statistic
+                title={metric.title}
+                value={metric.value}
+                suffix={metric.unit}
+                valueStyle={
+                  metric.range
+                    ? {
+                        color: isInRange(metric.value, metric.range) ? '#3f8600' : '#cf1322',
+                      }
+                    : undefined
+                }
+              />
+              {metric.range && (
+                <>
+                  <div className="text-xs text-gray-500 mt-1">
+                    正常范围: {metric.range[0]} - {metric.range[1]} {metric.unit}
+                  </div>
+                  <RangeVisualization value={metric.value} range={metric.range} />
+                </>
+              )}
+            </Col>
+          ))}
         </Row>
       </Card>
 
