@@ -6,7 +6,7 @@ import records from '../assets/records.json5'
 // @ts-ignore
 import basic from '../assets/basic.json5'
 
-type Record = typeof records[0]
+type HealthRecord = typeof records[0]
 type BasicInfo = typeof basic
 
 // 判断数值是否在正常范围内
