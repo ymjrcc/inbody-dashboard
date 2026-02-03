@@ -1,7 +1,7 @@
 import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
-import About from './pages/About'
-import Contact from './pages/Contact'
+import Charts from './pages/Charts'
+// import Contact from './pages/Contact'
 
 // 判断路径是否匹配菜单项（支持子路由匹配）
 function isActive(pathname: string, menuPath: string): boolean {
@@ -14,9 +14,9 @@ function isActive(pathname: string, menuPath: string): boolean {
 }
 
 const menuItems = [
-  { path: '/', label: '首页' },
-  { path: '/about', label: '关于我们' },
-  { path: '/contact', label: '联系我们' },
+  { path: '/', label: '数据总览' },
+  { path: '/charts', label: '图表分析' },
+  // { path: '/contact', label: '联系我们' },
 ]
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <h1 className="text-xl font-bold text-gray-900">我的应用</h1>
+                <h1 className="text-xl font-bold text-gray-900">YM健康管理</h1>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 {menuItems.map((item) => {
@@ -57,8 +57,8 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/charts" element={<Charts />} />
+          {/* <Route path="/contact" element={<Contact />} /> */}
         </Routes>
       </main>
     </div>

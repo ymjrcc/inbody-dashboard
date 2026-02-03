@@ -126,5 +126,261 @@
         "weightPercentage": 96.8
       }
     }
+  },
+  {
+    "date": "2025-12-27",
+    // 评分
+    "score": 80,
+    // 身体总水分
+    "totalWater": 42.6,
+    "totalWaterUnit": "L",
+    // 蛋白质
+    "protein": 11.7,
+    "proteinUnit": "kg",
+    // 无机盐
+    "inorganicSalt": 3.9,
+    "inorganicSaltUnit": "kg",
+    // 体脂肪
+    "bodyFat": 14.5,
+    "bodyFatUnit": "kg",
+    // 肌肉量
+    "muscleMass": 55,
+    "muscleMassUnit": "kg",
+    // 去脂体重
+    "leanBodyMass": 58.2,
+    "leanBodyMassUnit": "kg",
+    // 体重
+    "weight": 72.7,
+    "weightUnit": "kg",
+    // 骨骼肌
+    "skeletalMuscle": 33.3,
+    "skeletalMuscleUnit": "kg",
+    // 细胞外水分比率：
+    "extracellularWaterPercentage": 0.364,
+    // 肌肉均衡
+    "muscleBalance": {
+      // 右上肢
+      "rightUpperArm": {
+        "weight": 3.48,
+        "weightUnit": "kg",
+        "weightPercentage": 111.6
+      },
+      // 左上肢
+      "leftUpperArm": {
+        "weight": 3.43,
+        "weightUnit": "kg",
+        "weightPercentage": 110.2
+      },
+      // 躯干
+      "trunk": {
+        "weight": 26.9,
+        "weightUnit": "kg",
+        "weightPercentage": 108.3
+      },
+      // 右下肢
+      "rightLowerLimb": {
+        "weight": 8.33,
+        "weightUnit": "kg",
+        "weightPercentage": 96.2
+      },
+      // 左下肢
+      "leftLowerLimb": {
+        "weight": 8.32,
+        "weightUnit": "kg",
+        "weightPercentage": 96.1
+      }
+    }
+  },
+  {
+    "date": "2025-12-12",
+    // 评分
+    "score": 79,
+    // 身体总水分
+    "totalWater": 42.8,
+    "totalWaterUnit": "L",
+    // 蛋白质
+    "protein": 11.7,
+    "proteinUnit": "kg",
+    // 无机盐
+    "inorganicSalt": 3.9,
+    "inorganicSaltUnit": "kg",
+    // 体脂肪
+    "bodyFat": 16.2,
+    "bodyFatUnit": "kg",
+    // 肌肉量
+    "muscleMass": 55.2,
+    "muscleMassUnit": "kg",
+    // 去脂体重
+    "leanBodyMass": 58.4,
+    "leanBodyMassUnit": "kg",
+    // 体重
+    "weight": 74.6,
+    "weightUnit": "kg",
+    // 骨骼肌
+    "skeletalMuscle": 33.4,
+    "skeletalMuscleUnit": "kg",
+    // 细胞外水分比率：
+    "extracellularWaterPercentage": 0.365,
+    // 肌肉均衡
+    "muscleBalance": {
+      // 右上肢
+      "rightUpperArm": {
+        "weight": 3.39,
+        "weightUnit": "kg",
+        "weightPercentage": 108
+      },
+      // 左上肢
+      "leftUpperArm": {
+        "weight": 3.35,
+        "weightUnit": "kg",
+        "weightPercentage": 106.8
+      },
+      // 躯干
+      "trunk": {
+        "weight": 26.4,
+        "weightUnit": "kg",
+        "weightPercentage": 105.7
+      },
+      // 右下肢
+      "rightLowerLimb": {
+        "weight": 8.63,
+        "weightUnit": "kg",
+        "weightPercentage": 98.9
+      },
+      // 左下肢
+      "leftLowerLimb": {
+        "weight": 8.61,
+        "weightUnit": "kg",
+        "weightPercentage": 98.6
+      }
+    }
+  },
+  {
+    "date": "2025-11-23",
+    // 评分
+    "score": 79,
+    // 身体总水分
+    "totalWater": 42.7,
+    "totalWaterUnit": "L",
+    // 蛋白质
+    "protein": 11.7,
+    "proteinUnit": "kg",
+    // 无机盐
+    "inorganicSalt": 3.8,
+    "inorganicSaltUnit": "kg",
+    // 体脂肪
+    "bodyFat": 16.5,
+    "bodyFatUnit": "kg",
+    // 肌肉量
+    "muscleMass": 55.1,
+    "muscleMassUnit": "kg",
+    // 去脂体重
+    "leanBodyMass": 58.2,
+    "leanBodyMassUnit": "kg",
+    // 体重
+    "weight": 74.7,
+    "weightUnit": "kg",
+    // 骨骼肌
+    "skeletalMuscle": 33.5,
+    "skeletalMuscleUnit": "kg",
+    // 细胞外水分比率：
+    "extracellularWaterPercentage": 0.363,
+    // 肌肉均衡
+    "muscleBalance": {
+      // 右上肢
+      "rightUpperArm": {
+        "weight": 3.51,
+        "weightUnit": "kg",
+        "weightPercentage": 111.9
+      },
+      // 左上肢
+      "leftUpperArm": {
+        "weight": 3.47,
+        "weightUnit": "kg",
+        "weightPercentage": 110.6
+      },
+      // 躯干
+      "trunk": {
+        "weight": 27.2,
+        "weightUnit": "kg",
+        "weightPercentage": 108.5
+      },
+      // 右下肢
+      "rightLowerLimb": {
+        "weight": 8.34,
+        "weightUnit": "kg",
+        "weightPercentage": 95.5
+      },
+      // 左下肢
+      "leftLowerLimb": {
+        "weight": 8.38,
+        "weightUnit": "kg",
+        "weightPercentage": 96
+      }
+    }
+  },
+  {
+    "date": "2025-10-24",
+    // 评分
+    "score": 76,
+    // 身体总水分
+    "totalWater": 42.5,
+    "totalWaterUnit": "L",
+    // 蛋白质
+    "protein": 11.7,
+    "proteinUnit": "kg",
+    // 无机盐
+    "inorganicSalt": 3.89,
+    "inorganicSaltUnit": "kg",
+    // 体脂肪
+    "bodyFat": 18.4,
+    "bodyFatUnit": "kg",
+    // 肌肉量
+    "muscleMass": 54.9,
+    "muscleMassUnit": "kg",
+    // 去脂体重
+    "leanBodyMass": 58.1,
+    "leanBodyMassUnit": "kg",
+    // 体重
+    "weight": 76.5,
+    "weightUnit": "kg",
+    // 骨骼肌
+    "skeletalMuscle": 33.1,
+    "skeletalMuscleUnit": "kg",
+    // 细胞外水分比率：
+    "extracellularWaterPercentage": 0.367,
+    // 肌肉均衡
+    "muscleBalance": {
+      // 右上肢
+      "rightUpperArm": {
+        "weight": 3.37,
+        "weightUnit": "kg",
+        "weightPercentage": 106.7
+      },
+      // 左上肢
+      "leftUpperArm": {
+        "weight": 3.42,
+        "weightUnit": "kg",
+        "weightPercentage": 108.1
+      },
+      // 躯干
+      "trunk": {
+        "weight": 26.6,
+        "weightUnit": "kg",
+        "weightPercentage": 105.5
+      },
+      // 右下肢
+      "rightLowerLimb": {
+        "weight": 8.62,
+        "weightUnit": "kg",
+        "weightPercentage": 98.1
+      },
+      // 左下肢
+      "leftLowerLimb": {
+        "weight": 8.58,
+        "weightUnit": "kg",
+        "weightPercentage": 97.6
+      }
+    }
   }
 ]
