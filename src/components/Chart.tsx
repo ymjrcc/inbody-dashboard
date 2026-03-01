@@ -9,6 +9,8 @@ interface ChartProps {
   range?: number[]
   decimalPlaces?: number
   showPercentageLine?: boolean
+  /** 单条基准线（如评分 80 分） */
+  baseline?: number
 }
 
 /**
@@ -20,7 +22,8 @@ export default function Chart({
   unit,
   range,
   decimalPlaces = 0,
-  showPercentageLine = false
+  showPercentageLine = false,
+  baseline
 }: ChartProps) {
   const chartRef = useRef<HTMLDivElement>(null)
   const chartInstanceRef = useRef<echarts.ECharts | null>(null)
@@ -223,6 +226,33 @@ export default function Chart({
                 }
               }
             ]
+          } : baseline !== undefined ? {
+            silent: true,
+            symbol: 'none',
+            lineStyle: {
+              type: 'dashed',
+              width: 2,
+              color: '#999999'
+            },
+            label: {
+              show: true,
+              position: 'end',
+              formatter: `${baseline}${unit || ''}`,
+              color: '#999999',
+              fontWeight: 'bold'
+            },
+            data: [
+              {
+                yAxis: baseline,
+                name: `${baseline}${unit || ''}`,
+                lineStyle: {
+                  color: '#999999'
+                },
+                label: {
+                  color: '#999999'
+                }
+              }
+            ]
           } : range ? {
             silent: true,
             symbol: 'none',
@@ -282,7 +312,7 @@ export default function Chart({
       window.removeEventListener('resize', handleResize)
       chart.dispose()
     }
-  }, [title, data, unit, range, decimalPlaces, showPercentageLine])
+  }, [title, data, unit, range, decimalPlaces, showPercentageLine, baseline])
 
   // 如果没有数据，显示空状态
   if (data.length === 0) {

@@ -25,12 +25,35 @@ export default function Charts() {
     return generateMuscleBalanceMetrics(sortedRecords)
   }, [sortedRecords])
 
+  // 评分趋势数据
+  const scoreTrendData = useMemo(() => {
+    return sortedRecords.map(r => [r.date, r.score] as [string, number])
+  }, [sortedRecords])
+
   return (
     <div className="p-4 md:p-6 max-w-7xl mx-auto">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">图表分析</h1>
         <p className="text-gray-600">查看各项健康指标的趋势变化</p>
       </div>
+
+      {/* 评分趋势 */}
+      <Card 
+        title={
+          <span className="text-lg font-semibold">评分趋势</span>
+        }
+        className="mb-6 shadow-sm"
+      >
+        <div className="w-full">
+          <Chart
+            title="综合评分"
+            data={scoreTrendData}
+            unit="分"
+            decimalPlaces={0}
+            baseline={80}
+          />
+        </div>
+      </Card>
 
       {/* 主要指标 */}
       <Card 

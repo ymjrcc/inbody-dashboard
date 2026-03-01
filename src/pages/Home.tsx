@@ -20,7 +20,7 @@ export default function Home() {
   // 生成 Tabs 配置
   const tabItems: TabsProps['items'] = sortedRecords.map((record) => ({
     key: record.date,
-    label: formatDate(record.date),
+    label: `${formatDate(record.date)} (${record.score}分)`,
     children: <RecordDetail record={record} basic={basic} sortedRecords={sortedRecords} />
   }))
 
