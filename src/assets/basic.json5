@@ -1,5 +1,5 @@
 {
-  "name": "张三",
+  "name": "YM",
   "birthday": "1992-10-26",
   "gender": "男",
   "height": 169,
@@ -11,5 +11,6 @@
   "muscleMassRange": [45.4, 55.4],
   "leanBodyMassRange": [48.1, 58.7],
   "weightRange": [53.4, 72.2],
-  "bmiRange": [18.5, 24.9]
+  "bmiRange": [18.5, 24.9],
+  "extracellularWaterPercentageRange": [0.36, 0.39]
 }
